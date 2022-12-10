@@ -17,17 +17,23 @@ public class Urldatabase{
         key = UUID.randomUUID();
         count =0;
     }
+    Urldatabase(String link,ArrayList<JSONObject> obji){
+        JSONObject newjs = new JSONObject();
+        
+        newjs.put("website link",link);
+        newjs.put("unique id",UUID.randomUUID());
+        newjs.put("count",0);
+        obji.add(newjs);
+    }
+   
 
     public static void JSonify(ArrayList<Urldatabase> x2,ArrayList<JSONObject> jj){
         
         for(int i=0; i<x2.size();i++){
-            Urldatabase entry = x2.get(i);
-            JSONObject newjs = jj.get(i);
-            System.out.println("The link is "+ entry.urls + " usage count is "+ entry.count + " unique key is "+ entry.key);
-            newjs.put("id", entry.key);
-            newjs.put("website url", entry.urls);
-            newjs.put("usage count", entry.count);
-            jj.set(i,newjs);
+            //Urldatabase entry = x2.get(i);
+            JSONObject outjs = jj.get(i);
+            //System.out.println("The link is "+ entry.urls + " usage count is "+ entry.count + " unique key is "+ entry.key);
+            System.out.println(outjs);
     
         }   
     }
@@ -56,17 +62,20 @@ public class Urldatabase{
     }
 
     
-    public Urldatabase searchobj(String link,ArrayList<Urldatabase> x1){
+    public JSONObject searchobj(String link,ArrayList<JSONObject> x1){
         System.out.println("GetUrl in progress for link "+ link);
         int flag=0;
         //int position=0;
-        Urldatabase found=null;
+        JSONObject found=null;
         for(int i=0; i<x1.size(); i++){
-            Urldatabase e = x1.get(i);
-            System.out.println(e.key+ " "+ e.urls+ " "+ e.count);
-            String check =e.urls;
+            JSONObject e = x1.get(i);
+            System.out.println(e.get("key")+ " "+ e.get("website link")+ " "+ e.get("count"));
+            String urllink= (String) e.get("website link");
+
             
-            if(check.equals(link)){
+            //String check =e.urls;
+            
+            if(urllink.equals(link)){
                 //System.out.println(e.count+ " is the latest usage count of  "+ e.urls +"\n");
                 found =e;
                 //lastcount=e.count;
@@ -92,9 +101,12 @@ public class Urldatabase{
 
         Scanner in= new Scanner(System.in);
         int choice=0;
-
         char x='n';
+        outside:
+
+        
         do{
+            
             System.out.println("Welcome to Url counter\n Options\n 1. Storeurl\n 2. Geturl\n 3. Counturl\n 4. listUrls\n 5. Exit\n Enter your input:");
             choice=in.nextInt();
                 
@@ -105,42 +117,51 @@ public class Urldatabase{
                     System.out.println("storeurl mode activated");
                 
                 // x1.add(new Urldatabase(inputUrl()));     
-                    x1.add(new Urldatabase("google.com")); 
-                    x1.add(new Urldatabase("instagram.com"));
-                    x1.add(new Urldatabase("fb.com"));
-                    x1.add(new Urldatabase("naptser.com")); 
+                    x1.add(new Urldatabase("google.com",obji)); 
+                    x1.add(new Urldatabase("instagram.com",obji));
+                    x1.add(new Urldatabase("fb.com",obji));
+                    x1.add(new Urldatabase("naptser.com",obji)); 
 
                     
                     break;
                 case 2: 
                     System.out.println("geturl mode activated");
-                    Urldatabase Obj = searchobj(inputUrl(),x1);
-                    System.out.println("\n\nthe unique key is "+Obj.key);
-                    Obj.count+=1;
-                    x1.set(no,Obj);
+                    JSONObject Obj = searchobj(inputUrl(),obji);
+                    if(Obj!=null){
+                        System.out.println("\n\nthe unique key is "+Obj.get("key"));
+                        int use = (int) Obj.get("count");
+                        use+=1;
+                        Obj.put("count",use);
+                        obji.set(no,Obj);
+                    }
                     
                     break;
                 case 3: 
                     System.out.println("count mode activated");
-                    Urldatabase Obj1 = searchobj(inputUrl(),x1);
-                    System.out.println("\n\nthe latest usage count is "+Obj1.count);
+                    JSONObject UsageCount = searchobj(inputUrl(),obji);
+                    if (UsageCount!=null){
+                        System.out.println("\n\nthe latest usage count is "+UsageCount.get("count"));
+                    }
                     break;
                 case 4: 
                     System.out.println("list mode activated\n");
-                    display(x1);
-                   //JSonify(x1, obji);
+                   // display(x1);
+                    JSonify(x1, obji);
                    //System.out.println(obji);
                     break;
                 case 5 :
                     System.out.println("Exiting");
                     System.exit(0);
-
                     
                 }
             }
-
+            
             System.out.println("Do you wish to enter more (y/n)?");
             x = in.next().charAt(0);
+            if (x!='n' && x!='y'){
+                System.out.println("You entered a wrong value");
+                break outside;
+            }
             
             
         }while(x=='y');
