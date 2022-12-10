@@ -12,7 +12,19 @@ Requirements
 4. The command list should return all urls and counts. The return value is in JSON.
 5. The command exit should terminate the program
 
+Flow of the Program
+__________________________________________________________________________________________________________
 
+1. Menu is displayed awaiting input from User as
+
+Welcome to Url counter
+ Options
+ 1. Storeurl
+ 2. Geturl
+ 3. Counturl
+ 4. listUrls
+ 5. Exit
+ Enter your input:
 
 Additional Dependancies 
 ---------------------------------------------------------------------------
