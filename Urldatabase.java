@@ -188,14 +188,14 @@ public static void main(String[] args) throws Exception {
     Urldatabase ref = new Urldatabase(null);
 
 
-    ref.Menu(U,JS);
+    ref.Menu(U,JS);/* 
     System.out.println(U);
     System.out.println(U.get(0).urls);
     for(int i=0; i<U.size(); i++){
         Urldatabase data = U.get(i);
         System.out.println(data + "\t"+data.urls+"\t"+ data.key +"\t"+data.count);
     }
-    
+    */
 
     }
 }
