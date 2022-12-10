@@ -7,7 +7,6 @@ import org.json.simple.JSONObject;
 public class Urldatabase{
     static int no=0;
 
-
     String urls;
     Integer count;
     UUID key;
@@ -54,11 +53,21 @@ public class Urldatabase{
     }
   
     public String inputUrl(){
-        System.out.println("InputUrl working!\n Enter the link:");
-        Scanner in = new Scanner(System.in);
-        String Url = in.nextLine();
+        int looper=0;
+        String Url = null;
+        while(looper==0){
+            System.out.println("InputUrl working!\n Enter the link:");
+            Scanner in = new Scanner(System.in);
+            Url = in.nextLine();
+            if(Url.endsWith(".com")){
+                looper+=1;
+               
+            }
+            else{
+                System.out.println("Please enter a valid link");
+            }
+        }
         return Url;
-        
     }
 
     
@@ -165,7 +174,7 @@ public class Urldatabase{
                 }
             }
             
-            System.out.println("Do you wish to enter more (y/n)?");
+            System.out.println("Do you wish to continue (y/n)?");
             x = in.next().charAt(0);
             if (x!='n' && x!='y'){
                 System.out.println("You entered a wrong value");
@@ -177,10 +186,6 @@ public class Urldatabase{
         
     } 
      
-
-
-
-
 public static void main(String[] args) throws Exception {
     ArrayList<Urldatabase> U = new ArrayList<Urldatabase>();
     ArrayList<JSONObject> JS = new ArrayList<JSONObject>();
