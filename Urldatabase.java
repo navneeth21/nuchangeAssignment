@@ -55,35 +55,7 @@ public class Urldatabase{
         
     }
 
-    /*
-    public UUID geturl(String link,ArrayList<Urldatabase> x1){
-        System.out.println("GetUrl in progress for link "+ link);
-        int flag=0;
-        UUID id=null;
-        for(int i=0; i<x1.size(); i++){
-            Urldatabase e = x1.get(i);
-            System.out.println(e.key+ " "+ e.urls+ " "+ e.count);
-            String check =e.urls;
-            
-            if(check.equals(link)){
-                System.out.println(e.key + "is the key for "+ e.urls +"\n");
-                id=e.key;
-                e.count+=1;
-                x1.set(i,e);
-                flag=1;
-            }
-            
-        }
-        
-        if(flag==0){
-           
-         
-            System.out.println("the element is not found in the database");
-
-        } 
-        return id;
-    }
-    */
+    
     public Urldatabase searchobj(String link,ArrayList<Urldatabase> x1){
         System.out.println("GetUrl in progress for link "+ link);
         int flag=0;
@@ -114,36 +86,7 @@ public class Urldatabase{
         return found;
     }
 
-    
-
-  /*  public Integer counturl(String link,ArrayList<Urldatabase> x1){
-        System.out.println("GetUrl in progress for link "+ link);
-        int flag=0;
-        Integer lastcount=null;
-        for(int i=0; i<x1.size(); i++){
-            Urldatabase e = x1.get(i);
-            System.out.println(e.key+ " "+ e.urls+ " "+ e.count);
-            String check =e.urls;
-            
-            if(check.equals(link)){
-                System.out.println(e.count+ " is the latest usage count of  "+ e.urls +"\n");
-                lastcount=e.count;
-               // e.count+=1;
-               // x1.set(i,e);
-                flag=1;
-            }
-            
-        }
-        
-        if(flag==0){
-         
-            System.out.println("the element is not found in the database");
-
-        } 
-        return lastcount;
-    }
- 
- */
+  
     public void Menu(ArrayList<Urldatabase> x1,ArrayList<JSONObject> obji){
        
 
@@ -211,55 +154,10 @@ public class Urldatabase{
 public static void main(String[] args) throws Exception {
     ArrayList<Urldatabase> U = new ArrayList<Urldatabase>();
     ArrayList<JSONObject> JS = new ArrayList<JSONObject>();
-    
-/* 
-    Scanner in= new Scanner(System.in);
-    int choice=0;
-    char x='n';
-    do{
-        System.out.println("Welcome to Url counter\n Options\n 1. Storeurl\n 2. Geturl\n 3. Counturl\n 4. listUrls\n Enter your input:");
-        choice=in.nextInt();
-            
-       
-
-        switch(choice){
-        case 1: 
-            System.out.println("storeurl mode activated");
-            
-           
-            U.add(new Urldatabase(inputUrl()));     
-            
-            break;
-        case 2: 
-            System.out.println("geturl mode activated");
-            geturl(inputUrl(), x1);
-            break;
-        case 3: 
-            System.out.println("count mode activated");
-            break;
-        case 4: 
-            System.out.println("list mode activated\n");
-            
-            display(x1);
-            
-        
-            
-            break;
-        }
-
-        System.out.println("Do you wish to enter more (y/n)?");
-        x = in.next().charAt(0);
-       
-    }while(x!='n');*/
+ 
     Urldatabase ref = new Urldatabase(null);
 
-    JSONObject obj=new JSONObject();    
-    /*
-    obj.put("id","sonoo");    
-    obj.put("url",new Integer(27));    
-    obj.put("cpunt",new Double(600000));    
-    System.out.print(obj);    
-    */
+
     ref.Menu(U,JS);
     System.out.println(U);
     System.out.println(U.get(0).urls);
