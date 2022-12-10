@@ -54,7 +54,7 @@ public class Urldatabase{
     }
   
     public String inputUrl(){
-        System.out.println("InputUrl working!\n Enter the link to be stored:");
+        System.out.println("InputUrl working!\n Enter the link:");
         Scanner in = new Scanner(System.in);
         String Url = in.nextLine();
         return Url;
@@ -69,7 +69,7 @@ public class Urldatabase{
         JSONObject found=null;
         for(int i=0; i<x1.size(); i++){
             JSONObject e = x1.get(i);
-            System.out.println(e.get("key")+ " "+ e.get("website link")+ " "+ e.get("count"));
+           // System.out.println(e.get("key")+ " "+ e.get("website link")+ " "+ e.get("count"));
             String urllink= (String) e.get("website link");
 
             
