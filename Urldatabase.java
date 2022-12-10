@@ -21,7 +21,7 @@ public class Urldatabase{
         JSONObject newjs = new JSONObject();
         
         newjs.put("website link",link);
-        newjs.put("unique id",UUID.randomUUID());
+        newjs.put("key",UUID.randomUUID());
         newjs.put("count",0);
         obji.add(newjs);
     }
@@ -63,7 +63,7 @@ public class Urldatabase{
 
     
     public JSONObject searchobj(String link,ArrayList<JSONObject> x1){
-        System.out.println("GetUrl in progress for link "+ link);
+        System.out.println("URL search in progress for link "+ link);
         int flag=0;
         //int position=0;
         JSONObject found=null;
@@ -115,14 +115,23 @@ public class Urldatabase{
                 switch(choice){
                 case 1: 
                     System.out.println("storeurl mode activated");
-                
-                // x1.add(new Urldatabase(inputUrl()));     
+                    
                     x1.add(new Urldatabase("google.com",obji)); 
                     x1.add(new Urldatabase("instagram.com",obji));
                     x1.add(new Urldatabase("fb.com",obji));
                     x1.add(new Urldatabase("naptser.com",obji)); 
-
-                    
+                    x1.add(new Urldatabase("microsoft.com",obji));
+                    x1.add(new Urldatabase("tesla.com",obji)); 
+                    x1.add(new Urldatabase("nasa.com",obji)); 
+                    x1.add(new Urldatabase("windows.com",obji));
+                    x1.add(new Urldatabase("apple.com",obji));
+                    x1.add(new Urldatabase("amazon.com",obji)); 
+                    String data  =inputUrl();
+                    JSONObject inpObj = searchobj(data,obji);
+                    if(inpObj==null){
+                        x1.add(new Urldatabase(data,obji)); //for adding non existing entries into the database
+                        System.out.println(data + " added to the dataset successfully");
+                    }                    
                     break;
                 case 2: 
                     System.out.println("geturl mode activated");
